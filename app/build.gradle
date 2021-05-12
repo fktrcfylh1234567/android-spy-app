@@ -44,12 +44,10 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3"
 
     def work_version = "2.5.0"
-
-    // (Java only)
     implementation "androidx.work:work-runtime:$work_version"
-
-    // Kotlin + coroutines
     implementation "androidx.work:work-runtime-ktx:$work_version"
+
+    implementation 'com.google.crypto.tink:tink-android:1.5.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
